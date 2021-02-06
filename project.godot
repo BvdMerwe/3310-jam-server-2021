@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="3310 Server"
 run/main_scene="res://Server.tscn"
-config/icon="res://icon.png"
+config/custom_user_dir_name="res://"
 
 [autoload]
 
