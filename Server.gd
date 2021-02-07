@@ -4,7 +4,7 @@ extends Node
 
 var server_settings = {
 	"SERVER_PORT" : 46594,
-	"SERVER_IP" : '0.0.0.9',
+	"SERVER_IP" : '0.0.0.0',
 	"MIN_PLAYERS" : 1,
 	"MAX_PLAYERS" : 100,
 	"LOBBY_TIME" : 3, #seconds
@@ -62,7 +62,7 @@ func get_server_settings():
 		var file_read = ""
 		while settings_file.get_position() < settings_file.get_len():
 			file_read += settings_file.get_line()
-		server_settings = parse_json(file_read)
+		# server_settings = parse_json(file_read)
 	pass
 
 func _process(delta):
