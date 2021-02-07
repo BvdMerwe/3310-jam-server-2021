@@ -9,7 +9,9 @@ var server_settings = {
 	"MAX_PLAYERS" : 100,
 	"LOBBY_TIME" : 3, #seconds
 	"END_SCREEN_TIME" : 5, #seconds
-	"GAME_LENGTH" : 60, #seconds
+	"GAME_LENGTH" : 60, #seconds,
+
+	"LEADERBOARD_SERVER":'127.0.0.1:8080',
 }
 
 var peer
@@ -59,7 +61,6 @@ func get_server_settings():
 		var file_read = ""
 		while settings_file.get_position() < settings_file.get_len():
 			file_read += settings_file.get_line()
-		print(file_read)
 		server_settings = parse_json(file_read)
 	pass
 
@@ -184,6 +185,12 @@ remote func win_game():
 		var id = get_tree().get_rpc_sender_id()
 		end_game(id)
 	pass
+
+remote func win_time(time):
+	var id = get_tree().get_rpc_sender_id()
+	var name = player_info[id]["name"]
+	$LeaderBoard.send_winner_time({"id":id, "player":name, "score":time})
+
 
 func get_player_with_highest_score():
 	# var high_score = 0
