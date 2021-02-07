@@ -7,9 +7,9 @@ func _ready():
 	connect("request_completed", self, "_on_request_completed")
 
 	var dict = {"hello":"world"}
-	var error = post_request("http://httpbin.org/post", dict, false)
-	if error != OK:
-		push_error("An error occurred in the HTTP request. " + str(error))
+	# var error = post_request("http://httpbin.org/post", dict, false)
+	# if error != OK:
+	# 	push_error("An error occurred in the HTTP request. " + str(error))
 
 
 func get_request(url):
