@@ -51,7 +51,7 @@ func _ready():
 
 func get_server_settings():
 	var settings_file = File.new()
-	#location - 
+	#location - ~/.local/share/godot/ | %APPDATA%\Godot\ | ~/Library/Application Support/Godot/
 	if not settings_file.file_exists("user://server_settings.save"):
 		settings_file.open("user://server_settings.save", File.WRITE)
 		settings_file.store_line(to_json(server_settings))
