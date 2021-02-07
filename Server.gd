@@ -106,8 +106,8 @@ func stop_server():
 func create_server():
 	print('starting server on %s:%s' % [server_settings["SERVER_IP"], server_settings["SERVER_PORT"]] )
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_server(server_settings["SERVER_PORT"], server_settings["MAX_PLAYERS"])
 	peer.set_bind_ip(server_settings["SERVER_IP"])
+	peer.create_server(server_settings["SERVER_PORT"], server_settings["MAX_PLAYERS"])
 	get_tree().network_peer = peer
 	print("accessible at : %s" % [IP.get_local_addresses()])
 	pass
