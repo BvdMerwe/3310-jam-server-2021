@@ -84,7 +84,7 @@ func _process(delta):
 		if $EndScreenTimer.time_left > 0:
 			rpc_unreliable("game_ending", won_last_game)
 		else: 
-			rpc_unreliable("game_in_progress", stepify($GameTimer.time_left, 1))
+			rpc_unreliable("game_in_progress", stepify($GameTimer.time_left, 1), players_in_lobby.size())
 		
 		players_sorted_by_score.sort_custom(self, "sort_player_scores")
 		for pid in players_in_game.keys():
