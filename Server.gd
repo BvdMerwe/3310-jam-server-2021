@@ -62,7 +62,7 @@ func get_server_settings():
 		var file_read = ""
 		while settings_file.get_position() < settings_file.get_len():
 			file_read += settings_file.get_line()
-		# server_settings = parse_json(file_read)
+		server_settings = parse_json(file_read)
 	pass
 
 func _process(delta):
