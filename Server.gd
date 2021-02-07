@@ -4,14 +4,14 @@ extends Node
 
 var server_settings = {
 	"SERVER_PORT" : 46594,
-	"SERVER_IP" : '127.0.0.1',
+	"SERVER_IP" : '0.0.0.9',
 	"MIN_PLAYERS" : 1,
 	"MAX_PLAYERS" : 100,
 	"LOBBY_TIME" : 3, #seconds
 	"END_SCREEN_TIME" : 5, #seconds
 	"GAME_LENGTH" : 60, #seconds,
 
-	"LEADERBOARD_SERVER":'127.0.0.1:8080',
+	"LEADERBOARD_SERVER":'0.0.0.0:42069',
 }
 
 var peer
@@ -51,6 +51,7 @@ func _ready():
 
 func get_server_settings():
 	var settings_file = File.new()
+	#location - 
 	if not settings_file.file_exists("user://server_settings.save"):
 		settings_file.open("user://server_settings.save", File.WRITE)
 		settings_file.store_line(to_json(server_settings))
@@ -106,6 +107,7 @@ func create_server():
 	print('starting server on %s:%s' % [server_settings["SERVER_IP"], server_settings["SERVER_PORT"]] )
 	print("accessible at : %s" % [IP.get_local_addresses()])
 	peer = NetworkedMultiplayerENet.new()
+	peer.set_bind_ip(server_settings["SERVER_IP"])
 	peer.create_server(server_settings["SERVER_PORT"], server_settings["MAX_PLAYERS"])
 	get_tree().network_peer = peer
 	pass
@@ -189,7 +191,7 @@ remote func win_game():
 remote func win_time(time):
 	var id = get_tree().get_rpc_sender_id()
 	var name = player_info[id]["name"]
-	$LeaderBoard.send_winner_time({"id":id, "player":name, "score":time})
+	$LeaderBoard.send_winner_time(server_settings["LEADERBOARD_SERVER"], {"id":id, "player":name, "score":time})
 
 
 func get_player_with_highest_score():

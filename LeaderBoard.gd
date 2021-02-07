@@ -34,5 +34,5 @@ func post_request(url, data_to_send, use_ssl):
 	]
 	request(url, headers, use_ssl, HTTPClient.METHOD_POST, query)
 
-func send_winner_time(data):
-	post_request('http://130.61.188.46:42069/scores?ctx=sioaoa-3310-2021', data, false)
+func send_winner_time(server_addr, data):
+	post_request('http://%s/scores?ctx=sioaoa-3310-2021' % server_addr, data, false)
